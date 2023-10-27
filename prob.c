@@ -1,62 +1,62 @@
 #include <stdio.h>
 
-#define ROWS 5
-#define COLS 5
-
-void fillSpiral(int arr[ROWS][COLS], int result[], int n) {
-    int row_start = 0, row_end = ROWS - 1;
-    int col_start = 0, col_end = COLS - 1;
-    int index = 0;
-
-    while (row_start <= row_end && col_start <= col_end) {
-        // Вправо
-        for (int i = col_start; i <= col_end; i++) {
-            result[index++] = arr[row_start][i];
-        }
-        row_start++;
-
-        // Вниз
-        for (int i = row_start; i <= row_end; i++) {
-            result[index++] = arr[i][col_end];
-        }
-        col_end--;
-
-        // Влево
-        if (row_start <= row_end) {
-            for (int i = col_end; i >= col_start; i--) {
-                result[index++] = arr[row_end][i];
-            }
-            row_end--;
-        }
-
-        // Вверх
-        if (col_start <= col_end) {
-            for (int i = row_end; i >= row_start; i--) {
-                result[index++] = arr[i][col_start];
-            }
-            col_start++;
-        }
-    }
-}
+void spiral_matrix(int, int);
 
 int main() {
-    int twoDimArray[ROWS][COLS] = {
-        {1, 2, 3, 4, 5},
-        {6, 7, 8, 9, 10},
-        {11, 12, 13, 14, 15},
-        {16, 17, 18, 19, 20},
-        {21, 22, 23, 24, 25}
-    };
+	spiral_matrix(6, 5);
+	return 0;
+}
 
-    int n = ROWS * COLS;
-    int result[n];
+void spiral_matrix(int n, int k) {
+	
+	int arr[n][n];
+  int size = n * n;
+  int counter = 1, steps = 1;
+  int i, y, x;
 
-    fillSpiral(twoDimArray, result, n);
+  y = n % 2 == 0 ? n / 2 - 1: n / 2; 
+  x = n / 2;  
+  
+  arr[y][x] = k;
+  
+  while (counter < size) {
+    
+    arr[++y][x] = ++k;
+    counter += 1;
 
-    printf("Одномерный массив, заполненный спирально:\n");
-    for (int i = 0; i < n; i++) {
-        printf("%d ", result[i]);
+    for (i = 0; i < steps; i += 1, counter += 1) {
+      arr[y][--x] = ++k;  
     }
 
-    return 0;
-}
+    for (i = 0; i < steps; i += 1, counter += 1) {
+      arr[--y][x] = ++k;  
+    }
+
+    if (counter == size) break; 
+    steps += 1;
+
+    arr[--y][x] = ++k;
+    counter += 1;
+
+    for (i = 0; i < steps; i += 1, counter += 1) {
+      arr[y][++x] = ++k; 
+    }
+
+    for (i = 0; i < steps; i += 1, counter += 1) {
+      arr[++y][x] = ++k; 
+    }
+
+    if (counter == size) break; 
+    steps += 1;
+  
+  }
+
+  for(i = 0; i < n; i += 1) {
+   	for(int j = 0; j < n; j += 1) {
+    	printf("%3d", arr[i][j]);
+ 		}
+		printf("\n");	   
+	}
+	return; 
+
+}   

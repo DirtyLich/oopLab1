@@ -33,6 +33,47 @@ void ex_B(int **matrix, int N, int *D) {
 }
 
 // переписывание элементов матрицы в массив D по спирали, начиная с центрального элемента
+// void ex_C(int **matrix, int N, int *D) {
+//     int x = N / 2; // Начальная координата x (центральная строка)
+//     int y = N / 2; // Начальная координата y (центральный столбец)
+//     int dx = 0;
+//     int dy = 1;
+//     int steps = 1;
+//     int count = 0;
+
+//     D[count++] = matrix[x][y]; // Записываем текущий элемент в одномерный массив
+
+//     while (count < N * N) {
+//         for (int i = 0; i < steps; i++) {
+//             x += dx; // Перемещаемся в новую позицию
+//             y += dy;
+//             D[count++] = matrix[x][y];
+//         }
+
+//         // Проверяем, нужно ли изменить направление
+//         if (dx == 0 && dy == 1) {
+//             dx = 1;
+//             dy = 0; // Двигаемся вниз
+//         } else if (dx == 1 && dy == 0) {
+//             dx = 0;
+//             dy = -1; // Двигаемся влево
+//         } else if (dx == 0 && dy == -1) {
+//             dx = -1;
+//             dy = 0; // Двигаемся вверх
+//         } else {
+//             dx = 0;
+//             dy = 1; // Двигаемся вправо
+//         }
+
+//         if (dx != 0) {
+//             steps = abs(dx); // Устанавливаем количество шагов в новом направлении
+//         } else {
+//             steps = abs(dy);
+//         }
+//     }
+// }
+
+// переписывание элементов матрицы в массив D по спирали, начиная с центрального элемента
 void ex_C(int **matrix, int N, int *D) {
     int x = N / 2; // Начальная координата x (центральная строка)
     int y = N / 2; // Начальная координата y (центральный столбец)
@@ -40,6 +81,15 @@ void ex_C(int **matrix, int N, int *D) {
     int dy = 1;
     int steps = 1;
     int count = 0;
+
+    if (N % 2 == 0) {
+        // Если N четное, сдвинем начальные координаты, чтобы начать с верхнего левого угла центральной четверти
+        x--;
+        y--;
+        dx = 1;
+        dy = 0;
+        steps = 2;
+    }
 
     while (count < N * N) {
         D[count++] = matrix[x][y]; // Записываем текущий элемент в одномерный массив
@@ -73,13 +123,6 @@ void ex_C(int **matrix, int N, int *D) {
         steps--; // Уменьшаем количество оставшихся шагов в текущем направлении
     }
 }
-
-
-
-
-
-
-
 
 
 void ex_D(int **matrix, int N, int *D) {
@@ -175,23 +218,24 @@ int main() {
     std::cin >> user_sym;
     switch (user_sym)
     {
-    case 'a':
+    case 'A':
          ex_A(matrix, N, D);
             break;
     
-    case 'b':
+    case 'B':
          ex_B(matrix, N, D);
             break;
 
-    case 'c':
+    case 'C':
          ex_C(matrix, N, D);
             break;
 
-    case 'd':
+    case 'D':
          ex_D(matrix, N, D);
+         break;
 
     default:
-         std::cout<< "wrong format";
+         std::cout<< "wrong format"<<"\n";
         break;
     }
     

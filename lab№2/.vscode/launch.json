@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/VS.main()/OOP.LAB/oopLab1",
-      "program": "d:/VS.main()/OOP.LAB/oopLab1/build/Debug/outDebug",
+      "cwd": "d:/VS.main()/OOP.LAB/oopLab1/lab№2",
+      "program": "d:/VS.main()/OOP.LAB/oopLab1/lab№2/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
